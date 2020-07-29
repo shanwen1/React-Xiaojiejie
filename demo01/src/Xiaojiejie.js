@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react';
+import axios from 'axios';
 import XiaojiejieItem from './XiaojiejieItem';
 
 class Xiaojiejie extends Component {
@@ -53,7 +54,40 @@ class Xiaojiejie extends Component {
 		});
 	}
 
+	// componentWillMount() {
+	// 	console.log('componentWillMount----组件将要挂载到页面的时刻');
+	// }
+
+	componentDidMount() {
+		axios
+			.get('https://www.easy-mock.com/mock/5f210a388e891b12a0ac5386/ReactDemo01/xiaojiejie')
+			.then((res) => {
+				console.log('axios 获取数据成功:' + JSON.stringify(res));
+				this.setState({
+					list: res.data.data
+				});
+			})
+			.catch((error) => {
+				console.log('axios 获取数据失败' + error);
+			});
+	}
+
+	// shouldComponentUpdate() {
+	// 	console.log('1-shouldComponentUpdate---组件发生改变前执行');
+	// 	return true;
+	// }
+
+	// //shouldComponentUpdate返回true才会被执行。
+	// componentWillUpdate() {
+	// 	console.log('2-componentWillUpdate---组件更新前，shouldComponentUpdate函数之后执行');
+	// }
+
+	// componentDidUpdate() {
+	// 	console.log('4-componentDidUpdate----组件更新之后执行');
+	// }
+
 	render() {
+		//console.log('3-render---组件挂载中.......');
 		return (
 			<Fragment>
 				<div>
